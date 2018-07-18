@@ -33,8 +33,20 @@ create table success_killed (
   `seckill_id` bigint NOT NULL comment '商品库存id',
   `user_phone` bigint NOT NULL comment '手机号码',
   `state` tinyint NOT NULL default -1 comment '状态标识：-1：无效、0：成功、1：已付款',
-  `create_time` timestamp NOT NULL comment '创建时间'
+  `create_time` timestamp NOT NULL comment '创建时间',
+  PRIMARY KEY (seckill_id, user_phone),
+  key idx_create_time(create_time)
 ) ENGINE=InnoDB default CHARSET=utf8 comment ='秒杀成功明细';
 
 -- 连接数据库控制台
 mysql -uroot -p
+
+-- 为什么手写DDL
+-- 记录每次上线的DDL修改
+-- 上线版本v1.1
+ALTER TABLE seckill
+DROP Index idx_create_time,
+ADD index idx_c_s(start_time, end_time);
+
+-- 上线版本v1.2
+-- DDL ...
