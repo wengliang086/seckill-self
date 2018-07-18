@@ -39,6 +39,7 @@ public class SeckillDaoTest {
     @Test
     public void queryAll() {
         List<Seckill> seckills = seckillDao.queryAll(0, 1000);
+        Assert.assertEquals(4, seckills.size());
         System.out.println(seckills);
     }
 }
